@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <form id="newevent" action="http://localhost:3000/newevent" method="post">
+        <input id="new_event_id_input" type="text" name="new_event_id" placeholder="Enter event summary:">
+    </form>
+    <button onclick="printEvents()">Console log next 10 events</button>
+</body>
+</html> 
+<script>
+    function printEvents() {
+        $.ajax({
+            url: '/events',
+            dataType: 'json',
+            complete: function (data) {
+                console.log(data.responseJSON);
+            }
+        });
+    }
+
+    var input = document.getElementById("new_event_id_input");
+    input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            document.getElementById("newevent").submit();
+        };
+    });
+</script>
